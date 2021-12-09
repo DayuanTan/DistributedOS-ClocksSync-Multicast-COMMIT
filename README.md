@@ -19,3 +19,23 @@ Implement the causal ordered multicasting for the distributed system. Create two
 ## Bonus assignment (20pts) 
 Add the feature of distributed locking to your program to protect a shared file. The file only contains a counter that can be read and updated by processes. Implement two operations: acquire and release on a lock variable to protect the file. At the beginning, each process opens the file and tries to update the counter in the file and verifies the update. Thus, the critical section includes the following operations: (1) point the file offset to the counter; (2) update the counter; (3) read and print out the counter value. You can use any of the mutual exclusion algorithm learned in class to implement the locking. The expected result is that the read of the counter value always matches the updated value by a process if locking is enabled.
 
+# Background Knowledge Review
+
+## Synchronization, Clock Synchronization, Berkeley Algorithm
+Synchronization is the core issue for distributed systems. Synchronization in DS is archieved via clocks. 
+
+Two popular clock synchronization ways for DS are:
+- Christian's algorithm, which is absolute synchronization via connecting to UTC (Universial Time Coordinator)
+- Berkeley algorithm, which is relative synchronization without central time-server (like UTC). It uses arithmetic mean value as new time for everyone, so it is actually averaging algorithm.
+
+In DS, absolute time is less important. Clock synchronazation doesn't need to be absolute. DS care more about orders. So Berkeley Algorithm is more useful in DS than Christian's.
+
+In assignment 1, the Berkeley is also the one which is required.
+
+## Steps for the Berkeley algorithm (Averaging algorithm)
+1. The time daemon asks all the other machines for their clock values. 
+2. The machines answer.
+3. The Time daemon tells everyone how to adjust their clock.
+
+![](img/berkeley.png)
+[(This image credits to UPenn.)](https://www.cis.upenn.edu/~lee/07cis505/Lec/lec-ch6-synch1-PhysicalClock-v2.pdf)
