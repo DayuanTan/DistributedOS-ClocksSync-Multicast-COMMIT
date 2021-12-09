@@ -40,7 +40,21 @@ In assignment 1, the Berkeley is also the one which is required.
 ![](img/berkeley.png)
 [(This image credits to UPenn.)](https://www.cis.upenn.edu/~lee/07cis505/Lec/lec-ch6-synch1-PhysicalClock-v2.pdf)
 
+## Broadcast, Multicast, Unicast
+
+The 3 types of communication forms in DS are listed below. In this project all are needed.
+- Broadcast, message sent to all processes (anywhere)
+- Multicast, message sent to a group of processes
+- Unicast, message sent from one sender process to one receiver process
+
+For multicast, we care about the order issue. There arre 3 types multicast ordering approaches:
+- **FIFO ordering**: If a correct process issues (sends) multicast(g,m) to group g and then multicast(g,m’), then every correct  process that receives m’ would already have received m
+- **Causal ordering**: If multicast(g,m) -> multicast(g,m’)  then any correct process that delivers m’would already have delivered m. (is Lamport’s happens-before)
+- **Total ordering**: If a correct process P delivers message m before m’ (independent of the senders), then any other correct process P’ that receives m’ would already have received m.
+
+
 # Assignment step details
+
 
 ## Steps for assignment 1
 1. Implement at least 3 process. Each has a random clock initial value.
@@ -48,3 +62,20 @@ In assignment 1, the Berkeley is also the one which is required.
 3. Time daemon broadcast to ask all other processes for their local clock values.
 4. All processes answer.
 5. Time daemon calculaute the average value as final clock value and tell everyone how to adjust.
+
+## Steps for assignment 2
+
+This part asks for implementing two of FIFO ordering, Causal ordering and Total ordering.
+
+- For FIFO ordering and Causal ordering:
+1. Implement at least 3 process. Each has 2 threads, one for sending messages while another for receiving messages.
+2. Use vector clocks for clock synchronization and a vector of pre-sender sequence number data structure for message ordering. 
+3. Use different updating rules for delivering and buffering, for FIFO and Causal respectively (see below figure).
+
+![](img/fifo_update.png)
+![](img/causal_update.png)
+
+- For Total ordering:
+1. Select one process as sequencer (leader) arbitrarily. Use sequencer-based approach (see below figure).
+
+![](img/total_order_update.png)
