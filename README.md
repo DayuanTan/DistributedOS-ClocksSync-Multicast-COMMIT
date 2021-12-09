@@ -39,3 +39,12 @@ In assignment 1, the Berkeley is also the one which is required.
 
 ![](img/berkeley.png)
 [(This image credits to UPenn.)](https://www.cis.upenn.edu/~lee/07cis505/Lec/lec-ch6-synch1-PhysicalClock-v2.pdf)
+
+# Assignment step details
+
+## Steps for assignment 1
+1. Implement at least 3 process. Each has a random clock initial value.
+2. Select one as time daemon arbitrarily.
+3. Time daemon broadcast to ask all other processes for their local clock values.
+4. All processes answer.
+5. Time daemon calculaute the average value as final clock value and tell everyone how to adjust.
