@@ -4,24 +4,24 @@
 
 All tests are on Ubuntu 16.04 LTS, g++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609.
 
-# Proj2 Clocks, Multicast, and COMMIT - Requirement
+# 1. Proj2 Clocks Synchronization, Multicast Ordering, and Mutual Exclusion - Requirement
 
 In this programming project, you will develop an n-node distributed system that provides a causally ordered multicasting service and a distributed locking scheme. The distributed system uses logical clock to timestamp messages sent/received between nodes. To start the distributed system, each node should synchronize their logical clocks to the same initial value, based on which the ordering of events can be determined among the machines. For causal ordered multicasting you can use the algorithm discussed in class.
 
 Additionally, suppose the distributed nodes have read and write access to a shared file. The last task is to implement a distributed locking scheme that prevents concurrent accesses to the shared file (this is an extra credit bonus assignment). You can use the centralized, decentralized, or the distributed algorithm to realize mutual exclusive access to the file. To simplify the design and testing, the distributed system will be emulated using multiple processes on a single machine. Each process represents a machine and has a unique port number for communication.
 
-## Assignment-1 (60pts) 
+## 1.1 Assignment-1 (60pts) 
 Suppose the logical clock on each machine represents the number of messages have been sent and received by this machine. It is actually a counter used by the process (or the machine emulator) to count events. Randomly initialize the logical clock of individual processes and use Berkeley’s algorithm to synchronize these clocks to the average clock. You can select any process as the time daemon to initiate the clock synchronization. After the synchronization, each process prints out its logical clock to check the result of synchronization.
 
-## Assignment-2 (40pts) 
+## 1.2 Assignment-2 (40pts) 
 Implement the causal ordered multicasting for the distributed system. Create two threads for each process, one for sending the multicast message to other nodes and one for listening to its communication port. Use vector clocks to enforce the order of messages. Once a process delivers a received message to a user, it prints out the message on screen. You can assume that the number of processes (machines) is fixed (equal to or larger than 3) and processes will not fail, join, or leave the distributed system. Implement two versions of this program, one without causally ordered multicasting and one with this feature. Compare the results of the two programs.
 
-## Bonus assignment (20pts) 
+## 1.3 Bonus assignment (20pts) 
 Add the feature of distributed locking to your program to protect a shared file. The file only contains a counter that can be read and updated by processes. Implement two operations: acquire and release on a lock variable to protect the file. At the beginning, each process opens the file and tries to update the counter in the file and verifies the update. Thus, the critical section includes the following operations: (1) point the file offset to the counter; (2) update the counter; (3) read and print out the counter value. You can use any of the mutual exclusion algorithm learned in class to implement the locking. The expected result is that the read of the counter value always matches the updated value by a process if locking is enabled.
 
-# Background Knowledge Review
+# 2. Background Knowledge Review
 
-## Synchronization, Clock Synchronization, Berkeley Algorithm
+## 2.1 Synchronization, Clock Synchronization, Berkeley Algorithm
 Synchronization is the core issue for distributed systems. Synchronization in DS is archieved via clocks. 
 
 Two popular clock synchronization ways for DS are:
@@ -32,7 +32,7 @@ In DS, absolute time is less important. Clock synchronazation doesn't need to be
 
 In assignment 1, the Berkeley is also the one which is required.
 
-## Steps for the Berkeley algorithm (Averaging algorithm)
+## 2.2 Steps for the Berkeley algorithm (Averaging algorithm)
 1. The time daemon asks all the other machines for their clock values. 
 2. The machines answer.
 3. The Time daemon tells everyone how to adjust their clock.
@@ -40,7 +40,7 @@ In assignment 1, the Berkeley is also the one which is required.
 ![](img/berkeley.png)
 [(This image credits to UPenn.)](https://www.cis.upenn.edu/~lee/07cis505/Lec/lec-ch6-synch1-PhysicalClock-v2.pdf)
 
-## Broadcast, Multicast, Unicast
+## 2.3 Broadcast, Multicast, Unicast
 
 The 3 types of communication forms in DS are listed below. In this project all are needed.
 - Broadcast, message sent to all processes (anywhere)
@@ -53,17 +53,44 @@ For multicast, we care about the order issue. There arre 3 types multicast order
 - **Total ordering**: If a correct process P delivers message m before m’ (independent of the senders), then any other correct process P’ that receives m’ would already have received m.
 
 
-# Assignment step details
+## 2.4 Mutual exclusion
+
+- Mutual exclusion: is a concurrency control property which is introduced to prevent race conditions. 
+- Critical section: code only one thread/process can execute at a time 
+- Lock: mechanism for mutual exclusion. Lock entering critical section, accessing shared data. Unlock when complete. Wait if locked.
+
+For single machine, we can use shared variable (like semaphores) to share the status of shared-resources and user, because these data are all in memory or shared memory.
+
+For DS, no shared memory are avaiable, message passing is the sole means for implementing distributed mutual exclusion [[1]](https://www.cs.uic.edu/~ajayk/Chapter9.pdf).
+
+Three basic approaches for distributed mutual exclusion:
+1. Token based approach
+2. Non-token based approach (like Lamport's algorithm)
+3. Quorum based approach
+
+More algorithm introduction about above three types of approaches refer to [[2]](https://www.geeksforgeeks.org/mutual-exclusion-in-distributed-system/?ref=lbp).
+
+## 2.5 Lamport's algorithm
+
+The algorithm discussed in requirement of bonus assignment and in prof's slide is Lamport's algorithm.
+
+![](img/lamport1.png)
+![](img/lamport2.png)
+![](img/lamport3.png)
+[(These images credit to Prof. Ajay Kshemkalyani.)](https://www.cs.uic.edu/~ajayk/Chapter9.pdf)
 
 
-## Steps for assignment 1
+# 3. Assignment step details
+
+
+## 3.1 Steps for assignment 1 - clock synchronization berkeley algorithm
 1. Implement at least 3 process. Each has a random clock initial value.
 2. Select one as time daemon arbitrarily.
 3. Time daemon broadcast to ask all other processes for their local clock values.
 4. All processes answer.
 5. Time daemon calculaute the average value as final clock value and tell everyone how to adjust.
 
-## Steps for assignment 2
+## 3.2 Steps for assignment 2 - Multicast ordering
 
 This part asks for implementing two of FIFO ordering, Causal ordering and Total ordering.
 
@@ -79,3 +106,6 @@ This part asks for implementing two of FIFO ordering, Causal ordering and Total 
 1. Select one process as sequencer (leader) arbitrarily. Use sequencer-based approach (see below figure).
 
 ![](img/total_order_update.png)
+
+## 3.3 Steps for assignment 3 bounus assignment - Mutual exclusion in DS
+
