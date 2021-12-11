@@ -1,4 +1,4 @@
-# DistributedOS-ClocksSync-Multicast-COMMIT
+# DistributedOS-ClocksSync-MulticastOrdering-MutualExclusion
 
 ## Environments:
 
@@ -19,26 +19,22 @@ Implement the causal ordered multicasting for the distributed system. Create two
 ## 1.3 Bonus assignment (20pts) 
 Add the feature of distributed locking to your program to protect a shared file. The file only contains a counter that can be read and updated by processes. Implement two operations: acquire and release on a lock variable to protect the file. At the beginning, each process opens the file and tries to update the counter in the file and verifies the update. Thus, the critical section includes the following operations: (1) point the file offset to the counter; (2) update the counter; (3) read and print out the counter value. You can use any of the mutual exclusion algorithm learned in class to implement the locking. The expected result is that the read of the counter value always matches the updated value by a process if locking is enabled.
 
+# 2. Assignment 1 Clock Synchronization, Berkeley Algorithm
+
+The Background Knowledge Review and my Implementation for this part is at dir ["berkeley-algorithm-implementation"](berkeley-algorithm-implementation).
+
+
+
+## 3.1 Steps for assignment 1 - clock synchronization, berkeley algorithm
+1. Implement at least 3 process. Each has a random clock initial value.
+2. Select one as time daemon arbitrarily.
+3. Time daemon broadcast to ask all other processes for their local clock values.
+4. All processes answer.
+5. Time daemon calculaute the average value as final clock value and tell everyone how to adjust.
+
+
 # 2. Background Knowledge Review
 
-## 2.1 Synchronization, Clock Synchronization, Berkeley Algorithm
-Synchronization is the core issue for distributed systems. Synchronization in DS is archieved via clocks. 
-
-Two popular clock synchronization ways for DS are:
-- Christian's algorithm, which is absolute synchronization via connecting to UTC (Universial Time Coordinator)
-- Berkeley algorithm, which is relative synchronization without central time-server (like UTC). It uses arithmetic mean value as new time for everyone, so it is actually averaging algorithm.
-
-In DS, absolute time is less important. Clock synchronazation doesn't need to be absolute. DS care more about orders. So Berkeley Algorithm is more useful in DS than Christian's.
-
-In assignment 1, the Berkeley is also the one which is required.
-
-## 2.2 Steps for the Berkeley algorithm (Averaging algorithm)
-1. The time daemon asks all the other machines for their clock values. 
-2. The machines answer.
-3. The Time daemon tells everyone how to adjust their clock.
-
-![](img/berkeley.png)
-[(This image credits to UPenn.)](https://www.cis.upenn.edu/~lee/07cis505/Lec/lec-ch6-synch1-PhysicalClock-v2.pdf)
 
 ## 2.3 Broadcast, Multicast, Unicast
 
@@ -80,15 +76,9 @@ The algorithm discussed in requirement of bonus assignment and in prof's slide i
 [(These images credit to Prof. Ajay Kshemkalyani.)](https://www.cs.uic.edu/~ajayk/Chapter9.pdf)
 
 
-# 3. Assignment step details
+# 3. Assignment step details 
 
 
-## 3.1 Steps for assignment 1 - clock synchronization berkeley algorithm
-1. Implement at least 3 process. Each has a random clock initial value.
-2. Select one as time daemon arbitrarily.
-3. Time daemon broadcast to ask all other processes for their local clock values.
-4. All processes answer.
-5. Time daemon calculaute the average value as final clock value and tell everyone how to adjust.
 
 ## 3.2 Steps for assignment 2 - Multicast ordering
 
@@ -109,3 +99,8 @@ This part asks for implementing two of FIFO ordering, Causal ordering and Total 
 
 ## 3.3 Steps for assignment 3 bounus assignment - Mutual exclusion in DS
 
+
+
+Reference:
+
+1. [multi-process fork()](https://www.geeksforgeeks.org/creating-multiple-process-using-fork/)
