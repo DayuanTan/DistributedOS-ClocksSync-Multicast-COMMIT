@@ -1,8 +1,8 @@
-# DistributedOS-ClocksSync-MulticastOrdering-MutualExclusion
+# DistributedOS-ClocksSync-MulticastOrdering-MutualExclusion-COMMIT
 
 ## Environments:
 
-All tests are on Ubuntu 16.04 LTS, g++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609.
+All tests are on Ubuntu 16.04 LTS, g++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609. -std=c++11
 
 # 1. Proj2 Clocks Synchronization, Multicast Ordering, and Mutual Exclusion - Requirement
 
@@ -29,9 +29,11 @@ The Background Knowledge Review and my Implementation for this part is at this r
 
 1. Phase 2.0, Firstly I Implemented multicast programming for 1 sender and multiple receivers using sender.cpp and receiver.cpp files.
 2. Phase 2.1, Secondly I merged them into one process with 2 threads. One for sending messages while another one for continuously receiving messages from multicast group. This is required in assignment 2.
-3. Thridly I implemented caucal ordering.
+
 
 # 4. Phase 3 - Assignment 2 Multicast Ordering
+
+3. Thridly I implemented FIFO ordering, causal ordering and total ordering based on phase 2.1.
 
 # 5. Phase 4 - Assignment 3 Mutual Exlcusion
 
