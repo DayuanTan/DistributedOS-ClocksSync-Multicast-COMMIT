@@ -19,34 +19,16 @@ Implement the causal ordered multicasting for the distributed system. Create two
 ## 1.3 Bonus assignment (20pts) 
 Add the feature of distributed locking to your program to protect a shared file. The file only contains a counter that can be read and updated by processes. Implement two operations: acquire and release on a lock variable to protect the file. At the beginning, each process opens the file and tries to update the counter in the file and verifies the update. Thus, the critical section includes the following operations: (1) point the file offset to the counter; (2) update the counter; (3) read and print out the counter value. You can use any of the mutual exclusion algorithm learned in class to implement the locking. The expected result is that the read of the counter value always matches the updated value by a process if locking is enabled.
 
-# 2. Assignment 1 Clock Synchronization, Berkeley Algorithm
+# 2. Phase 1 - Assignment 1 Clock Synchronization, Berkeley Algorithm
 
 The Background Knowledge Review and my Implementation for this part is at dir ["berkeley-algorithm-implementation"](berkeley-algorithm-implementation).
 
+# 3. Phase 2 - Assignment 2 Multicast Programming 
 
+# 4. Phase 3 - Assignment 2 Multicast Ordering
 
-## 3.1 Steps for assignment 1 - clock synchronization, berkeley algorithm
-1. Implement at least 3 process. Each has a random clock initial value.
-2. Select one as time daemon arbitrarily.
-3. Time daemon broadcast to ask all other processes for their local clock values.
-4. All processes answer.
-5. Time daemon calculaute the average value as final clock value and tell everyone how to adjust.
+# 5. Phase 4 - Assignment 3 Mutual Exlcusion
 
-
-# 2. Background Knowledge Review
-
-
-## 2.3 Broadcast, Multicast, Unicast
-
-The 3 types of communication forms in DS are listed below. In this project all are needed.
-- Broadcast, message sent to all processes (anywhere)
-- Multicast, message sent to a group of processes
-- Unicast, message sent from one sender process to one receiver process
-
-For multicast, we care about the order issue. There arre 3 types multicast ordering approaches:
-- **FIFO ordering**: If a correct process issues (sends) multicast(g,m) to group g and then multicast(g,m’), then every correct  process that receives m’ would already have received m
-- **Causal ordering**: If multicast(g,m) -> multicast(g,m’)  then any correct process that delivers m’would already have delivered m. (is Lamport’s happens-before)
-- **Total ordering**: If a correct process P delivers message m before m’ (independent of the senders), then any other correct process P’ that receives m’ would already have received m.
 
 
 ## 2.4 Mutual exclusion
@@ -76,27 +58,6 @@ The algorithm discussed in requirement of bonus assignment and in prof's slide i
 [(These images credit to Prof. Ajay Kshemkalyani.)](https://www.cs.uic.edu/~ajayk/Chapter9.pdf)
 
 
-# 3. Assignment step details 
-
-
-
-## 3.2 Steps for assignment 2 - Multicast ordering
-
-This part asks for implementing two of FIFO ordering, Causal ordering and Total ordering.
-
-- For FIFO ordering and Causal ordering:
-1. Implement at least 3 process. Each has 2 threads, one for sending messages while another for receiving messages.
-2. Use vector clocks for clock synchronization and a vector of pre-sender sequence number data structure for message ordering. 
-3. Use different updating rules for delivering and buffering, for FIFO and Causal respectively (see below figure).
-
-![](img/fifo_update.png)
-![](img/causal_update.png)
-
-- For Total ordering:
-1. Select one process as sequencer (leader) arbitrarily. Use sequencer-based approach (see below figure).
-
-![](img/total_order_update.png)
-
 ## 3.3 Steps for assignment 3 bounus assignment - Mutual exclusion in DS
 
 
@@ -104,3 +65,11 @@ This part asks for implementing two of FIFO ordering, Causal ordering and Total 
 Reference:
 
 1. [multi-process fork()](https://www.geeksforgeeks.org/creating-multiple-process-using-fork/)
+2. [Multicast](https://tldp.org/HOWTO/Multicast-HOWTO-6.html)
+3. [Multicast Sockets - Programming Tips](http://www.cs.unc.edu/~jeffay/dirt/FAQ/comp249-001-F99/mcast-socket.html)
+4. [NETWORK PROGRAMMING LINUX SOCKET PART 13: MULTICAST (I feel this one most useful)](https://www.tenouk.com/Module41c.html)
+5. [Oracle Using Multicast - send, receive IPv4 Multicast Datagrams](https://docs.oracle.com/cd/E23824_01/html/821-1602/sockets-137.html)
+6. [Linux man7 socket - Linux socket interface, SOL_SOCKET](https://man7.org/linux/man-pages/man7/socket.7.html)
+7. [Linux man7 socket - create an endpoint for communication](https://man7.org/linux/man-pages/man2/socket.2.html)
+8. [Linux man7 setsockopt — set the socket options](https://man7.org/linux/man-pages/man3/setsockopt.3p.html)
+9. [Linux man7 IPv4 protocol implementation](https://man7.org/linux/man-pages/man7/ip.7.html)
