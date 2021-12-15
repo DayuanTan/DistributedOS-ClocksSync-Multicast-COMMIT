@@ -21,9 +21,15 @@ Add the feature of distributed locking to your program to protect a shared file.
 
 # 2. Phase 1 - Assignment 1 Clock Synchronization, Berkeley Algorithm
 
-The Background Knowledge Review and my Implementation for this part is at dir ["berkeley-algorithm-implementation"](berkeley-algorithm-implementation).
+The Background Knowledge Review and my Implementation for this part is at this repo ["berkeley-algorithm-implementation"](https://github.com/DayuanTan/berkeley-algorithm-implementation/blob/main/README.md).
 
 # 3. Phase 2 - Assignment 2 Multicast Programming 
+
+The Background Knowledge Review and my Implementation for this part is at this repo ["Multicast Programming and Multicast Ordering Implementation"](https://github.com/DayuanTan/multicast-programming-multicast-ordering).
+
+1. Firstly I Implemented multicast programming for 1 sender and multiple receivers using sender.cpp and receiver.cpp files.
+2. Secondly I merged them into one process with 2 threads. One for sending messages while another one for continuously receiving messages from multicast group. This is required in assignment 2.
+3. Thridly I implemented caucal ordering.
 
 # 4. Phase 3 - Assignment 2 Multicast Ordering
 
