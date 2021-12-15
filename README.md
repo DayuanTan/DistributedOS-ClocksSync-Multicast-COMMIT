@@ -4,7 +4,7 @@
 
 All tests are on Ubuntu 16.04 LTS, g++ (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609. -std=c++11
 
-# 1. Proj2 Clocks Synchronization, Multicast Ordering, and Mutual Exclusion - Requirement
+# 1. Proj2 Clocks Synchronization, Multicast Ordering, and Mutual Exclusion, COMMIT - Requirement
 
 In this programming project, you will develop an n-node distributed system that provides a causally ordered multicasting service and a distributed locking scheme. The distributed system uses logical clock to timestamp messages sent/received between nodes. To start the distributed system, each node should synchronize their logical clocks to the same initial value, based on which the ordering of events can be determined among the machines. For causal ordered multicasting you can use the algorithm discussed in class.
 
