@@ -28,18 +28,22 @@ The Background Knowledge Review and my Implementation for this part is at this r
 The Background Knowledge Review and my Implementation for this part is at this repo ["Multicast Programming and Multicast Ordering Implementation"](https://github.com/DayuanTan/multicast-programming-multicast-ordering).
 
 1. Phase 2.0, Firstly I Implemented multicast programming for 1 sender and multiple receivers using sender.cpp and receiver.cpp files.
-2. Phase 2.1, Secondly I merged them into one process with 2 threads. One for sending messages while another one for continuously receiving messages from multicast group. This is required in assignment 2.
+2. Phase 2.1, Secondly I merged them into one process with 2 threads. One for sending messages while another one for continuously receiving messages from multicast group. This is required in assignment 2. Phase 3.0 implementation is based on the Phase 2.1 version.
 
 
 # 4. Phase 3 - Assignment 2 Multicast Ordering
 
-3. Thridly I implemented FIFO ordering, causal ordering and total ordering based on phase 2.1.
+The Background Knowledge Review and my Implementation for this part is at this repo ["Multicast Programming and Multicast Ordering Implementation"](https://github.com/DayuanTan/multicast-programming-multicast-ordering).
+
+3. Phase 3.0, Thridly I implemented multicasting with messages processing but no ordering, which will be a base for multicast ordering versions. I added lots of helper functions to deal with message processing.
+4. Phase 3.1, is my implementation of FIFO ordering, based on phase 3.0 version. I added sending and receiving rules based on FIFO ordering algorithm.
+5. Phase 3.2, is my implementation of Causal ordering, based on phase 3.1 version. The adjustments are mainly message sending and receiving parts for Causal ordering algorithm.
 
 # 5. Phase 4 - Assignment 3 Mutual Exlcusion
 
+(Didn't implement. Mutual Exlcusion are very similar to [proj1](https://github.com/DayuanTan/DistributedOS-A-Centralized-Multi-User-Concurrent-Bank-Account-Manager-Multithread-Synchronization/blob/main/README.md). Can add that part into here easily. )
 
-
-## 2.4 Mutual exclusion
+## Mutual exclusion
 
 - Mutual exclusion: is a concurrency control property which is introduced to prevent race conditions. 
 - Critical section: code only one thread/process can execute at a time 
@@ -56,7 +60,7 @@ Three basic approaches for distributed mutual exclusion:
 
 More algorithm introduction about above three types of approaches refer to [[2]](https://www.geeksforgeeks.org/mutual-exclusion-in-distributed-system/?ref=lbp).
 
-## 2.5 Lamport's algorithm
+## Lamport's algorithm
 
 The algorithm discussed in requirement of bonus assignment and in prof's slide is Lamport's algorithm.
 
@@ -65,8 +69,6 @@ The algorithm discussed in requirement of bonus assignment and in prof's slide i
 ![](img/lamport3.png)
 [(These images credit to Prof. Ajay Kshemkalyani.)](https://www.cs.uic.edu/~ajayk/Chapter9.pdf)
 
-
-## 3.3 Steps for assignment 3 bounus assignment - Mutual exclusion in DS
 
 
 
